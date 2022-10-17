@@ -1,0 +1,9 @@
+RewriteEngine on
+# Rewrite /foo/bar to /foo/bar.php
+RewriteRule ^([^.?]+)$ %{REQUEST_URI}.php [L]
+# Return 404 if original request is /foo/bar.php
+RewriteCond %{THE_REQUEST} "^[^ ]* .?\.php[? ].$"
+RewriteRule .* - [L,R=404]
+
+RewriteRule processing include/process/process.php [Nc]
+RewriteRule adminprocess admin/include/process/admin-process.php [Nc]
